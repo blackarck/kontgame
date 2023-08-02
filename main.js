@@ -19,12 +19,13 @@ document.addEventListener("DOMContentLoaded", function () {
       color: generateRandomColor(), // fill color of the sprite rectangle
       width: 20, // width and height of the sprite rectangle
       height: 20,
-      dx:  2, // move the sprite 2px to the right every frame
-      
+      //dx:  2, // move the sprite 2px to the right every frame
     });
+
     snakefull.push(sprite);
   }
   console.log("Snakefull length "+snakefull.length);
+
   let loop = GameLoop({
     // create the main game loop
     update: function () {
@@ -53,25 +54,25 @@ document.addEventListener("DOMContentLoaded", function () {
         dirx=0;
         diry=2;
       }
+      
+      //snake movement , move only head and transfer position
+      // to previous boxes for a pixel like movement
+      for (let i = 0; i < snakefull.length-1 ; i++) {
+        //transfer pos to previous box
+        snakefull[i+1].x = snakefull[i].x-(dirx*10);
+        snakefull[i+1].y = snakefull[i].y-(diry*10);
+     }
+
       if( Math.abs(dirx) > 0 || Math.abs(diry) > 0){
-        snakefull[snakefull.length-1].dx = dirx;
-        snakefull[snakefull.length-1].dy = diry;
+         snakefull[0].dx = dirx;
+         snakefull[0].dy = diry;
       }
 
-      //swap tail
-        let tempsprite = snakefull[snakefull.length-1];
-        for (let i = snakeBod - 1; i-1 >= 0; i--) {
-          snakefull[i].x = snakefull[i-1].x;
-          snakefull[i].y = snakefull[i-1].y;
-         
-        }
-        snakefull[0].x=tempsprite.x;
-        snakefull[0].y=tempsprite.y;
-      // console.log("Dirx-"+dirx+", diry-"+diry);
-      for (let i = snakeBod - 1; i >= 0; i--) {
-        snakefull[i].update();
-      }
-      
+     // console.log("Dirx-"+dirx+", diry-"+diry);
+     // for (let i = snakeBod - 1; i >= 0; i--) {
+     //   snakefull[i].update();
+     // }
+      snakefull[0].update();
       // wrap the sprites position when it reaches
       // the edge of the screen
       for (let i = snakeBod - 1; i >= 0; i--) {
