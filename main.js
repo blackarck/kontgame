@@ -35,6 +35,7 @@ ONE TIME VAR INITIALIZATION
   let grid = 15;
   //generate the snake body
 
+
   for (let i = snakeBod - 1; i >= 0; i--) {
     let sprite = Sprite({
       x: 15 * i + 2 * i, // starting x,y position of the sprite
