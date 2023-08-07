@@ -10,12 +10,16 @@ window.onload= initFunction();
     const sessionID = localStorage.getItem("sessionID");
     console.log('session id '+sessionID);
     if (sessionID) {
-      this.usernameAlreadySelected = true;
-      socket.auth = { sessionID };
+      console.log("Session id is "+sessionID);
+      username='vivek';
+      
+       socket.auth = { sessionID };
+       socket.auth.username = { username };
       socket.connect();
     }else{
+       console.log("username is "+username);
         username='vivek';
-        socket.auth = { username };
+        socket.auth.username = { username };
         socket.connect();
     }
  }//end of function initfunction
