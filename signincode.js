@@ -12,14 +12,12 @@ window.onload= initFunction();
     if (sessionID) {
       console.log("Session id is "+sessionID);
       username='vivek';
-      
-       socket.auth = { sessionID };
-       socket.auth.username = { username };
+      socket.auth = { sessionID };
       socket.connect();
     }else{
        console.log("username is "+username);
         username='vivek';
-        socket.auth.username = { username };
+        socket.auth = { username };
         socket.connect();
     }
  }//end of function initfunction
