@@ -12,8 +12,9 @@
     <script type="module">
       import { io } from "https://cdn.socket.io/4.3.2/socket.io.esm.min.js";
     </script>
-    <script src="./signincode.js"></script>
     <script src="./main.js"></script>
+    <script src="./signincode.js"></script>
+
     
 </head>
 <body>
@@ -22,7 +23,7 @@
     <canvas id="gamecanvas" width="600" height="480" style="border:1px solid black;"></canvas>
    
     <div  class="signin">
-      <button onclick="signinbutton('vivek')">Sign In</button>
+      <button onclick="signinbutton('vivek')" disabled id="signinbtn">Sign In</button>
     </div>
     <div class="social-links">
         <a href="https://twitter.com/blackarck" target="_blank"><img src="./images/twitter.svg" alt="Twitter"></a>

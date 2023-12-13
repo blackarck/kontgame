@@ -9,13 +9,14 @@ Libs used:
  
 Thanks for checking out
  
-
- 
 =======================================================
 INIT KONTRA ENGINE
 =======================================================
 */
 console.log("Main program starting");
+
+let snakefull = []; // array to hold the snake body
+
 document.addEventListener("DOMContentLoaded", function () {
   //initialize kontra
   let { canvas, context } = kontra.init();
@@ -29,7 +30,7 @@ ONE TIME VAR INITIALIZATION
 =======================================================
 */
   let snakeBod = 6; // initial length of snake body
-  let snakefull = []; // array to hold the snake body
+ 
   let dirx = 0;
   let diry = 0;
   let grid = 15;
@@ -100,6 +101,7 @@ MAIN GAME OBJECT
           snakefull[i] = snakefull[i - 1];
         }
         snakefull[1] = headsprite;
+        sendPosition(snakefull);
       }
 
       for (let i = snakeBod - 1; i >= 0; i--) {
@@ -131,6 +133,10 @@ MAIN GAME OBJECT
     },
   });
   loop.start(); // start the game
+
+  //enable the signin button once snake is generated
+  const signBtn = document.getElementById('signinbtn');
+  signBtn.removeAttribute('disabled');
 });
 
 /* 

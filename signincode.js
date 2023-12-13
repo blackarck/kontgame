@@ -6,27 +6,29 @@ window.onload= initFunction();
 
 
  function initFunction(){
-     console.log('Init function');
     const sessionID = localStorage.getItem("sessionID");
-    console.log('session id '+sessionID);
     if (sessionID) {
+      //user already logged in previously
       console.log("Session id is "+sessionID);
-      username='vivek';
-      socket.auth = { sessionID };
-      socket.connect();
+      var authdata={
+        username: "vivek",
+        sessionid: sessionID
+      }
     }else{
-       console.log("username is "+username);
-        username='vivek';
-        socket.auth = { username };
-        socket.connect();
+      //new user assign a session ID
+        var authdata={
+          username: "vivek",
+          sessionid: ''
+        } 
     }
+    socket.auth = { authdata };
+    socket.connect();
  }//end of function initfunction
 
 function signinbutton(nameentered){
-    console.log(`Name setup is ${nameentered}`);
+    //console.log(`Name setup is ${nameentered}`);
     username=nameentered;
-    socket.emit('userlogin',{data: username});
-    console.log("After emit ");
+    sendPosition();
 }
 
   socket.on("hello",(arg)=>{
@@ -42,3 +44,18 @@ function signinbutton(nameentered){
   // save the ID of the user
   socket.userID = userID;
 });
+
+socket.on("getPosition",({userid, posdata})=>{
+  //console.log("getpos uid-"+userid + " sockuserid-"+socket.userID);
+  //console.log("posdata "+posdata)
+  if(userid != socket.userID){
+    //draw that snake
+    console.log("recieved pos "+JSON.stringify(posdata));
+  }
+});
+
+
+function sendPosition() {
+  //console.log("Sending pos "+JSON.stringify(snakefull));
+  socket.emit('updatePosition', snakefull);
+}
