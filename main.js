@@ -16,6 +16,7 @@ INIT KONTRA ENGINE
 console.log("Main program starting");
 
 let snakefull = []; // array to hold the snake body
+let otherPlayers = [];
 
 document.addEventListener("DOMContentLoaded", function () {
   //initialize kontra
@@ -104,9 +105,22 @@ MAIN GAME OBJECT
         sendPosition(snakefull);
       }
 
+      // console.log("posdata "+JSON.stringify(snakefull))
+
       for (let i = snakeBod - 1; i >= 0; i--) {
-        snakefull[i].update();
+        Sprite( snakefull[i]).update();
       }
+      
+      //update other player position on board
+
+          //console.log("Otherplayer is "+otherPlayers.length);
+          for(let j1 =0 ; j1 <= otherPlayers.length-1; j1++){
+            for (let i = otherPlayers[j1].posdata.length - 1; i >= 0; i--) {
+              //console.log(" otherPlayers[j1].posdata[i]"+ JSON.stringify(otherPlayers[j1].posdata[i]))
+             // console.log(typeof otherPlayers[j1].posdata[i]);
+             Sprite(otherPlayers[j1].posdata[i]).update();
+           }
+         }
 
       // wrap the sprites position when it reaches
       // the edge of the screen
@@ -128,8 +142,10 @@ MAIN GAME OBJECT
     render: function () {
       // render the game state
       for (let i = snakeBod - 1; i >= 0; i--) {
+        //console.log("snakefull is" + snakefull[i])
         snakefull[i].render();
       }
+  
     },
   });
   loop.start(); // start the game
